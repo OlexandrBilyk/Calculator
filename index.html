@@ -5,8 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculator</title>
     <link rel="stylesheet" href="./css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
+      integrity="sha512-q6WgHqiHlKyOqslT/lgBgodhd03Wp4BEqKeW6nNtlOY4quzyG3VoQKFrieaCeSnuVseNKRGpGeDU3qPmabCANg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+      integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
+    <main class="main">
+      <section class="enter-pole" id="enterPole">0</section>
+      <div class="calculator">
+        <button class="calculator__btn calculator__btn--orange" id="clearAll">
+          AC</button
+        ><button class="calculator__btn calculator__btn--orange" id="clearLast">
+          &larr;</button
+        ><button class="calculator__btn calculator__btn--orange" id="interest">
+          &#37;</button
+        ><button class="calculator__btn calculator__btn--orange" id="divide">
+          &divide;</button
+        ><button class="calculator__btn calculator__btn--number" id="btn7">
+          7</button
+        ><button class="calculator__btn calculator__btn--number" id="btn8">
+          8</button
+        ><button class="calculator__btn calculator__btn--number" id="btn9">
+          9</button
+        ><button class="calculator__btn calculator__btn--orange" id="multiply">
+          &times;</button
+        ><button class="calculator__btn calculator__btn--number" id="btn4">
+          4</button
+        ><button class="calculator__btn calculator__btn--number" id="btn5">
+          5</button
+        ><button class="calculator__btn calculator__btn--number" id="btn6">
+          6</button
+        ><button class="calculator__btn calculator__btn--orange" id="minus">
+          &minus;</button
+        ><button class="calculator__btn calculator__btn--number" id="btn1">
+          1</button
+        ><button class="calculator__btn calculator__btn--number" id="btn2">
+          2</button
+        ><button class="calculator__btn calculator__btn--number" id="btn3">
+          3</button
+        ><button class="calculator__btn calculator__btn--orange" id="plus">
+          &plus;</button
+        ><button class="calculator__btn calculator__btn--orange">
+          &#128425;</button
+        ><button class="calculator__btn calculator__btn--number" id="btn0">
+          0</button
+        ><button class="calculator__btn" id="comma">,</button
+        ><button class="calculator__btn calculator__btn--equals" id="equal">
+          &equals;
+        </button>
+      </div>
+    </main>
     <script src="./js/index.js"></script>
   </body>
 </html>
