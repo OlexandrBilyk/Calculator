@@ -1,7 +1,7 @@
 let btns = document.querySelectorAll(".calculator__btn--number");
 
 let clearAll = document.getElementById("clearAll");
-let clearlast = document.getElementById("clearLast");
+let clearLast = document.getElementById("clearLast");
 let interest = document.getElementById("interest");
 let divide = document.getElementById("divide");
 let multiply = document.getElementById("multiply");
@@ -18,7 +18,8 @@ clearAll.addEventListener("click", function () {
   currentOperation = "";
   firstNumber = "";
 });
-clearlast.addEventListener("click", function () {
+
+clearLast.addEventListener("click", function () {
   enterPole.textContent = enterPole.textContent.slice(0, -1) || "0";
 });
 
@@ -39,58 +40,29 @@ comma.addEventListener("click", function () {
 });
 
 interest.addEventListener("click", function () {
-  firstNumber = Number(enterPole.textContent) / 100;
-  enterPole.textContent = firstNumber.toString();
+  enterPole.textContent = (Number(enterPole.textContent) / 100).toString();
 });
 
 plus.addEventListener("click", function () {
-  if (firstNumber !== "") {
-    let secondNumber = Number(enterPole.textContent);
-    firstNumber = firstNumber + secondNumber;
-    enterPole.textContent = firstNumber.toString();
-  } else {
-    firstNumber = Number(enterPole.textContent);
-  }
+  firstNumber = Number(enterPole.textContent);
   enterPole.textContent = "0";
   currentOperation = "+";
 });
 
 minus.addEventListener("click", function () {
-  if (firstNumber !== "") {
-    let secondNumber = Number(enterPole.textContent);
-    firstNumber = firstNumber - secondNumber;
-    enterPole.textContent = firstNumber.toString();
-  } else {
-    firstNumber = Number(enterPole.textContent);
-  }
+  firstNumber = Number(enterPole.textContent);
   enterPole.textContent = "0";
   currentOperation = "-";
 });
 
 multiply.addEventListener("click", function () {
-  if (firstNumber !== "") {
-    let secondNumber = Number(enterPole.textContent);
-    firstNumber = firstNumber * secondNumber;
-    enterPole.textContent = firstNumber.toString();
-  } else {
-    firstNumber = Number(enterPole.textContent);
-  }
+  firstNumber = Number(enterPole.textContent);
   enterPole.textContent = "0";
   currentOperation = "*";
 });
 
 divide.addEventListener("click", function () {
-  if (firstNumber !== "") {
-    let secondNumber = Number(enterPole.textContent);
-    if (secondNumber === 0) {
-      enterPole.textContent = "Error";
-    } else {
-      firstNumber = firstNumber / secondNumber;
-      enterPole.textContent = firstNumber.toString();
-    }
-  } else {
-    firstNumber = Number(enterPole.textContent);
-  }
+  firstNumber = Number(enterPole.textContent);
   enterPole.textContent = "0";
   currentOperation = "/";
 });
@@ -110,14 +82,10 @@ equal.addEventListener("click", function () {
       result = firstNumber * secondNumber;
       break;
     case "/":
-      if (secondNumber === 0) {
-        result = "Error";
-      } else {
-        result = firstNumber / secondNumber;
-      }
+      result = secondNumber === 0 ? "Error" : firstNumber / secondNumber;
       break;
     default:
-      result = "Error";
+      result = enterPole.textContent;
   }
 
   enterPole.textContent = result.toString();
