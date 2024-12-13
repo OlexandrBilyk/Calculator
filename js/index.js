@@ -13,6 +13,32 @@ let enterPole = document.getElementById("enterPole");
 let currentOperation = "";
 let firstNumber = "";
 
+const calculate = function () {
+  let secondNumber = Number(enterPole.textContent);
+  let result;
+
+  switch (currentOperation) {
+    case "plus":
+      result = firstNumber + secondNumber;
+      break;
+    case "minus":
+      result = firstNumber - secondNumber;
+      break;
+    case "multiply":
+      result = firstNumber * secondNumber;
+      break;
+    case "divide":
+      result = secondNumber === 0 ? "Error" : firstNumber / secondNumber;
+      break;
+    default:
+      result = secondNumber;
+  }
+
+  enterPole.textContent = result.toString();
+  firstNumber = result === "Error" ? "" : result;
+  return result;
+};
+
 clearAll.addEventListener("click", function () {
   enterPole.textContent = "0";
   currentOperation = "";
@@ -43,31 +69,7 @@ interest.addEventListener("click", function () {
   enterPole.textContent = (Number(enterPole.textContent) / 100).toString();
 });
 
-const calculate = function () {
-  let secondNumber = Number(enterPole.textContent);
-  let result;
-
-  switch (currentOperation) {
-    case "plus":
-      result = firstNumber + secondNumber;
-      break;
-    case "minus":
-      result = firstNumber - secondNumber;
-      break;
-    case "multiply":
-      result = firstNumber * secondNumber;
-      break;
-    case "divide":
-      result = secondNumber === 0 ? "Error" : firstNumber / secondNumber;
-      break;
-    default:
-      result = secondNumber;
-  }
-
-  enterPole.textContent = result.toString();
-  firstNumber = result === "Error" ? "" : result;
-  return result;
-}[(plus, minus, multiply, divide)].forEach((operator) => {
+[plus, minus, multiply, divide].forEach((operator) => {
   operator.addEventListener("click", function () {
     if (currentOperation && firstNumber !== "") {
       calculate();
