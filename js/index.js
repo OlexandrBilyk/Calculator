@@ -43,52 +43,45 @@ interest.addEventListener("click", function () {
   enterPole.textContent = (Number(enterPole.textContent) / 100).toString();
 });
 
-plus.addEventListener("click", function () {
-  firstNumber = Number(enterPole.textContent);
-  enterPole.textContent = "0";
-  currentOperation = "+";
-});
-
-minus.addEventListener("click", function () {
-  firstNumber = Number(enterPole.textContent);
-  enterPole.textContent = "0";
-  currentOperation = "-";
-});
-
-multiply.addEventListener("click", function () {
-  firstNumber = Number(enterPole.textContent);
-  enterPole.textContent = "0";
-  currentOperation = "*";
-});
-
-divide.addEventListener("click", function () {
-  firstNumber = Number(enterPole.textContent);
-  enterPole.textContent = "0";
-  currentOperation = "/";
-});
-
-equal.addEventListener("click", function () {
+const calculate = function () {
   let secondNumber = Number(enterPole.textContent);
   let result;
 
   switch (currentOperation) {
-    case "+":
+    case "plus":
       result = firstNumber + secondNumber;
       break;
-    case "-":
+    case "minus":
       result = firstNumber - secondNumber;
       break;
-    case "*":
+    case "multiply":
       result = firstNumber * secondNumber;
       break;
-    case "/":
+    case "divide":
       result = secondNumber === 0 ? "Error" : firstNumber / secondNumber;
       break;
     default:
-      result = enterPole.textContent;
+      result = secondNumber;
   }
 
   enterPole.textContent = result.toString();
-  firstNumber = result;
-  currentOperation = "";
+  firstNumber = result === "Error" ? "" : result;
+  return result;
+}[(plus, minus, multiply, divide)].forEach((operator) => {
+  operator.addEventListener("click", function () {
+    if (currentOperation && firstNumber !== "") {
+      calculate();
+    } else {
+      firstNumber = Number(enterPole.textContent);
+    }
+    enterPole.textContent = "0";
+    currentOperation = operator.id;
+  });
+});
+
+equal.addEventListener("click", function () {
+  if (currentOperation && firstNumber !== "") {
+    calculate();
+    currentOperation = "";
+  }
 });
