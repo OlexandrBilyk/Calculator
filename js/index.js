@@ -11,38 +11,20 @@ let comma = document.getElementById("comma");
 let equal = document.getElementById("equal");
 let enterPole = document.getElementById("enterPole");
 let currentOperation = "";
-let firstNumber = "";
 
 const calculate = function () {
-  let secondNumber = Number(enterPole.textContent);
-  let result;
-
-  switch (currentOperation) {
-    case "plus":
-      result = firstNumber + secondNumber;
-      break;
-    case "minus":
-      result = firstNumber - secondNumber;
-      break;
-    case "multiply":
-      result = firstNumber * secondNumber;
-      break;
-    case "divide":
-      result = secondNumber === 0 ? "Error" : firstNumber / secondNumber;
-      break;
-    default:
-      result = secondNumber;
+  try {
+    const expression = enterPole.textContent;
+    const result = math.evaluate(expression);
+    enterPole.textContent = result;
+  } catch (error) {
+    enterPole.textContent = "Erorr";
   }
-
-  enterPole.textContent = result.toString();
-  firstNumber = result === "Error" ? "" : result;
-  return result;
 };
 
 clearAll.addEventListener("click", function () {
   enterPole.textContent = "0";
   currentOperation = "";
-  firstNumber = "";
 });
 
 clearLast.addEventListener("click", function () {
@@ -60,7 +42,8 @@ btns.forEach(function (btn) {
 });
 
 comma.addEventListener("click", function () {
-  if (!enterPole.textContent.includes(".")) {
+  const lastNumber = enterPole.textContent.split(/[\+\-\*\/]/).pop();
+  if (!lastNumber.includes(".")) {
     enterPole.textContent += ".";
   }
 });
@@ -71,19 +54,19 @@ interest.addEventListener("click", function () {
 
 [plus, minus, multiply, divide].forEach((operator) => {
   operator.addEventListener("click", function () {
-    if (currentOperation && firstNumber !== "") {
-      calculate();
-    } else {
-      firstNumber = Number(enterPole.textContent);
+    const lastOppeartion = enterPole.textContent.slice(-1);
+    const operators = ["+", "-", "*", "/"];
+
+    if (operators.includes(lastOppeartion)) {
+      return;
     }
-    enterPole.textContent = "0";
-    currentOperation = operator.id;
+
+    currentOperation = operator.textContent.trim();
+    enterPole.textContent += currentOperation;
   });
 });
 
 equal.addEventListener("click", function () {
-  if (currentOperation && firstNumber !== "") {
-    calculate();
-    currentOperation = "";
-  }
+  calculate();
+  currentOperation = "";
 });
